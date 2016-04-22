@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>Information</title>
+		<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/static/css/weather-icons.min.css" rel="stylesheet">
+		<link href="/static/css/weather-icons-wind.min.css" rel="stylesheet">
+		<link href="/static/css/info.css" rel="stylesheet">
+		<link href="/static/img/favicon.ico" rel="icon">
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-6">
+					<div id="time"></div>
+					<div id="date"></div>
+				</div>
+				<div class="col-sm-6">
+					<div class="container-fluid">
+						<div class="col-lg-12">
+							<table id="weatherTable">
+								<tr>
+									<td rowspan="2" id="temperature"></td>
+									<td id="temperatureHigh"></td>
+								</tr>
+								<tr>
+									<td id="temperatureLow"></td>
+								</tr>
+								<tr>
+									<td colspan="2" id="weatherIcon"></td>
+								</tr>
+								<tr>
+									<td colspan="2" id="sunrise"></td>
+								</tr>
+								<tr>
+									<td colspan="2" id="sunset"></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer">
+			<div class="fluid-container">
+				<div class="col-lg-12" id="news">
+					
+				</div>
+			</div>
+		</footer>
+		<script src="/static/js/socket.io-1.4.5.js"></script>
+		<script src="/static/js/jquery.min.js"></script>
+		<script src="/static/js/bootstrap.min.js"></script>
+		<script src="/static/js/info.js"></script>
+	</body>
+</html>
