@@ -50,6 +50,11 @@ td{
 	text-align: right;
 }
 
+#location{
+	font-size: 30px;
+	text-align: right;
+}
+
 .footer{
 	position: absolute;
 	bottom: 0;

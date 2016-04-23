@@ -11,6 +11,7 @@ window.onload = function() {
 		$('#weatherIcon').html('<i class="wi ' + json.weatherIcon + '"></i>');
 		$('#sunrise').html('<i class="wi wi-sunrise"></i> ' + json.sunrise);
 		$('#sunset').html('<i class="wi wi-sunset"></i> ' + json.sunset);
+		$('#location').html(json.location);
 	});
 	
 	socket.on('news', function(json){

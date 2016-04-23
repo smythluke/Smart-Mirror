@@ -88,7 +88,8 @@ def newsThread():
 def weatherThread():
 	while True:
 		print("making API call to wunderground")
-		resource = urllib.request.urlopen("http://api.wunderground.com/api/" + API_KEY + "/astronomy/conditions/forecast/q/UK/Cheltenham.json")
+		API_KEY = "b4bb5522c38b311b" #http://api.wunderground.com/api/b4bb5522c38b311b/astronomy/conditions/forecast/q/autoip.json
+		resource = urllib.request.urlopen("http://api.wunderground.com/api/" + API_KEY + "/astronomy/conditions/forecast/q/autoip.json")
 		content =  resource.read().decode(resource.headers.get_content_charset())
 		weatherJSON = json.loads(content)
 		#with open('weather.json') as weather:
@@ -99,6 +100,7 @@ def weatherThread():
 		smallWeatherJSON['temperatureHigh'] = weatherJSON['forecast']['simpleforecast']['forecastday'][0]['high']['celsius']
 		smallWeatherJSON['temperatureLow'] = weatherJSON['forecast']['simpleforecast']['forecastday'][0]['low']['celsius']
 		smallWeatherJSON['sunrise'] = "%02d" % int(weatherJSON['sun_phase']['sunrise']['hour']) + ':' + "%02d" % int(weatherJSON['sun_phase']['sunrise']['minute'])
+		smallWeatherJSON['location'] = weatherJSON['current_observation']['display_location']['city'] + ", " + weatherJSON['current_observation']['display_location']['country']
 		smallWeatherJSON['sunset'] = "%02d" % int(weatherJSON['sun_phase']['sunset']['hour']) + ':' + "%02d" % int(weatherJSON['sun_phase']['sunset']['minute'])
 		smallWeatherJSON['forecastString'] = weatherJSON['forecast']['txt_forecast']['forecastday'][0]['fcttext_metric']
 		smallWeatherJSON['currentWeather'] = weatherJSON['current_observation']['weather']
