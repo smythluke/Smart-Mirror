@@ -54,6 +54,8 @@ def connected():
 	global newsThreadStarted
 	global weatherThreadStarted
 	
+	wait_for_internet_connection()
+	
 	if not newsThreadStarted:
 		newsThread.start()
 		newsThreadStarted = True
@@ -116,7 +118,15 @@ def weatherThread():
 		
 		socketio.emit('weather', smallWeatherJSON)
 		time.sleep(1800)
-		
+
+def wait_for_internet_connection():
+	while True:
+		try:
+			response = urllib.request.urlopen('http://87.237.66.2',timeout=1)
+			return
+		except urllib.request.URLError:
+			pass
+
 newsThread = Thread(target=newsThread)
 newsThread.daemon = True
 newsThreadStarted = False
