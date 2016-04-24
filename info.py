@@ -90,7 +90,6 @@ def newsThread():
 def weatherThread():
 	while True:
 		print("making API call to wunderground")
-		API_KEY = "b4bb5522c38b311b" #http://api.wunderground.com/api/b4bb5522c38b311b/astronomy/conditions/forecast/q/autoip.json
 		resource = urllib.request.urlopen("http://api.wunderground.com/api/" + API_KEY + "/astronomy/conditions/forecast/q/autoip.json")
 		content =  resource.read().decode(resource.headers.get_content_charset())
 		weatherJSON = json.loads(content)
