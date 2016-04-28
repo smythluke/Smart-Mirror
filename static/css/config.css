@@ -1,0 +1,19 @@
+#first-container{
+	margin-top: 50px;
+}
+
+#navbar{
+	border: 0;
+}
+
+.navbar-inverse .navbar-brand {
+	color: #fff;
+}
+
+.form-group{
+	margin: 15px;
+}
+
+#notie-alert-inner {
+	padding: 8px;
+}

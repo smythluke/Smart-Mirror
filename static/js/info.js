@@ -19,12 +19,34 @@ window.onload = function() {
 		smallNewsJSON = json;
 		rollNews();
 	});
+	
+	socket.on('setting', function(json){
+		for (var key in json) {
+			if (json.hasOwnProperty(key)) {
+				switch(key){
+					case "light":
+						if (json[key] == "on"){
+							$(".light").show();
+							$("body").css("color", "#000");
+						} else {
+							$(".light").hide();
+							$("body").css("color", "#fff");
+						}
+						break;
+					case "alarm":
+						nextAlarm = new Date(json[key]);
+						break;
+				}
+			}
+		}
+	});
 		
 };
 var weather = {};
 var news = {};
 var days=['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 var months=['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novermber', 'December'];
+var nextAlarm = new Date(0);
 
 function startTime() {
 	var today = new Date();
@@ -33,11 +55,9 @@ function startTime() {
 	var s = checkTime(today.getSeconds());
 	$('#time').html(h + ":" + m);
 	$('#date').html(days[today.getDay()] + ", " + ordinal_suffix_of(today.getDate()) + " " + months[today.getMonth()])
-	if(today.getDay() > 0 && today.getDay() < 6){
-		if(($('#time').html()+":"+s) == "06:35:00"){
-			if(!window.speechSynthesis.speaking){
-				speak("Good-morning. The forecast for today is " + weather.forecastString + ". The current weather is " + weather.currentWeather);
-			}
+	if(today.getTime().toString().slice(0, -3) == nextAlarm.getTime().toString().slice(0, -3)){
+		if(!window.speechSynthesis.speaking){
+			speak("Good-morning. The forecast for today is " + weather.forecastString + ". The current weather is " + weather.currentWeather);
 		}
 	}
 	var t = setTimeout(startTime, 500);

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>Smart Mirror Configuration</title>
+		<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/static/css/notie.css" rel="stylesheet">
+		<link href="/static/css/config.css" rel="stylesheet">
+		<link href="/static/img/favicon.ico" rel="icon">
+	</head>
+	<body>
+		<nav class="navbar navbar-inverse navbar-fixed-top" id="navbar">
+			<div class="container">
+				<div class="navbar-header navbar-brand">Smart Mirror</div>
+			</div>
+		</nav>
+
+		<div class="container" id="first-container">
+			<div class="row">
+				<div class="col-md-12">
+					<form class="form-horizontal" onsubmit="event.preventDefault();">
+						<div class="form-group">
+							<label for="light" class="col-sm-2 control-label">Light</label>
+							<div class="col-sm-10">
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-default" id="lightOn">On</button>
+									<button type="button" class="btn btn-default active" id="lightOff">Off</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="alarm" class="col-sm-2 control-label">Alarm</label>
+							<div class="col-sm-8">
+								<input type="datetime-local" class="form-control" name="alarm" id="alarm">
+							</div>
+							<div class="col-sm-2">
+								<button class="btn btn-default form-control" onclick="submitAlarm()">Confirm</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<script src="/static/js/jquery.min.js"></script>
+		<script src="/static/js/socket.io-1.4.5.js"></script>
+		<script src="/static/js/bootstrap.min.js"></script>
+		<script src="/static/js/notie.min.js"></script>
+		<script src="/static/js/config.js"></script>
+	</body>
+</html>

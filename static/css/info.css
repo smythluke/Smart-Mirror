@@ -1,12 +1,13 @@
 body{
 	background-color: #000;
 	color: #fff;
-	font-weight: bold;
+	font-family: 'Open Sans', sans-serif;
 }
 
 #time{
 	font-size: 100px;
 	font-weight: normal;
+	font-family: 'Roboto', sans-serif;
 }
 
 #date{
@@ -26,6 +27,7 @@ td{
 #temperature{
 	font-size: 100px;
 	font-weight: normal;
+	font-family: 'Roboto', sans-serif;
 }
 
 #temperatureHigh{
@@ -48,6 +50,7 @@ td{
 #sunrise, #sunset{
 	font-size: 30px;
 	text-align: right;
+	font-family: 'Roboto', sans-serif;
 }
 
 #location{
@@ -62,4 +65,31 @@ td{
 	text-align: center;
 	width: 100%;
 	font-size: 30px;
+}
+
+#top-light, #bottom-light, #left-light, #right-light{
+	display: none;
+	background: #fff;
+	position: fixed;
+}
+#left-light, #right-light{
+	top: 0; bottom: 0;
+	width: 200px;
+}
+#left-light{ 
+	left: 0; 
+}
+#right-light{
+	right: 0;
+}
+
+#top-light, #bottom-light{
+	left: 0; right: 0;
+	height: 200px;
+}
+#top-light{
+	top: 0;
+}
+#bottom-light{
+	bottom: 0;
 }
