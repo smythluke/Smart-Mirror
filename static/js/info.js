@@ -33,6 +33,10 @@ window.onload = function() {
 							$("body").css("color", "#fff");
 						}
 						break;
+					case "lightLevel":
+						$("#left-light, #right-light").width(json[key] + "%");
+						$("#top-light, #bottom-light").height(json[key] + "%");
+						break;
 					case "alarm":
 						nextAlarm = new Date(json[key]);
 						break;
@@ -57,7 +61,7 @@ function startTime() {
 	$('#date').html(days[today.getDay()] + ", " + ordinal_suffix_of(today.getDate()) + " " + months[today.getMonth()])
 	if(today.getTime().toString().slice(0, -3) == nextAlarm.getTime().toString().slice(0, -3)){
 		if(!window.speechSynthesis.speaking){
-			speak("Good-morning. The forecast for today is " + weather.forecastString + ". The current weather is " + weather.currentWeather);
+			speak("Hello. The forecast for today is " + weather.forecastString + ". The current weather is " + weather.currentWeather);
 		}
 	}
 	var t = setTimeout(startTime, 500);

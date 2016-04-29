@@ -15,6 +15,11 @@ window.onload = function() {
 							$("#lightOff").addClass("active");
 						}
 						break;
+					case "lightLevel":
+						percentage = json[key] * 2;
+						$(".lightLevelButton").removeClass("active");
+						$("#lightLevel" + percentage).addClass("active");
+						break;
 					case "alarm":
 						if (json[key] == 0){
 							$("#alarm").val("");
@@ -57,8 +62,11 @@ $(function(){
 	});
 });
 
-
-
+function lightLevel(percent){
+	$(".lightLevelButton").removeClass("active");
+	$("#lightLevel" + percent *2).addClass("active");
+	socket.emit("setting", {"lightLevel":percent});
+}
 
 
 

@@ -27,7 +27,18 @@
 							<div class="col-sm-10">
 								<div class="btn-group" role="group">
 									<button type="button" class="btn btn-default" id="lightOn">On</button>
-									<button type="button" class="btn btn-default active" id="lightOff">Off</button>
+									<button type="button" class="btn btn-default" id="lightOff">Off</button>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="light" class="col-sm-2 control-label">Light Level</label>
+							<div class="col-sm-10">
+								<div class="btn-group" role="group">
+									<button type="button" class="btn btn-default lightLevelButton" id="lightLevel25" onclick="lightLevel(12.5)">25%</button>
+									<button type="button" class="btn btn-default lightLevelButton" id="lightLevel50" onclick="lightLevel(25)">50%</button>
+									<button type="button" class="btn btn-default lightLevelButton" id="lightLevel75" onclick="lightLevel(37.5)">75%</button>
+									<button type="button" class="btn btn-default lightLevelButton" id="lightLevel100" onclick="lightLevel(50)">100%</button>
 								</div>
 							</div>
 						</div>

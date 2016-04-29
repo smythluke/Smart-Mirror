@@ -14,7 +14,11 @@ socketio = SocketIO(app)
 smallNewsJSON = {}
 smallWeatherJSON = {}
 
-settings={}
+settings={
+	'light': 'off',
+	'lightLevel': 12.5,
+	'alarm': 0
+}
 
 icons = {
 	'day': {
@@ -89,6 +93,7 @@ def config():
 def newsThread():
 	while True:
 		try:
+			print("making request to bbc news")
 			newsFeed = feedparser.parse("http://feeds.bbci.co.uk/news/rss.xml?edition=uk")
 			#newsFeed = feedparser.parse(r'bbc.xml')
 			for i, entry in enumerate(newsFeed.entries):

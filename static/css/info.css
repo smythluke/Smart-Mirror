@@ -43,7 +43,7 @@ td{
 }
 
 #weatherIcon{
-	font-size: 100px;
+	font-size: 80px;
 	text-align: right;
 }
 
@@ -74,7 +74,6 @@ td{
 }
 #left-light, #right-light{
 	top: 0; bottom: 0;
-	width: 200px;
 }
 #left-light{ 
 	left: 0; 
@@ -85,7 +84,6 @@ td{
 
 #top-light, #bottom-light{
 	left: 0; right: 0;
-	height: 200px;
 }
 #top-light{
 	top: 0;
