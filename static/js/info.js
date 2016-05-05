@@ -1,6 +1,7 @@
 window.onload = function() {
 	
 	startTime();
+	recognition.start()
 	
 	socket = io.connect('http://' + document.domain + ':' + location.port + '/');	
 	socket.on('weather', function(json){
@@ -44,7 +45,6 @@ window.onload = function() {
 			}
 		}
 	});
-		
 };
 var weather = {};
 var news = {};
@@ -105,7 +105,122 @@ function speak(text){
 	window.speechSynthesis.resume();
 }
 
+var recognition = new webkitSpeechRecognition();
+recognition.continuous = true;
+recognition.interimResults = true;
 
+recognition.onstart = function() {
+	
+}
+
+recognition.onresult = function(event) {
+	var interimTranscript = '';
+
+	for (var i = event.resultIndex; i < event.results.length; ++i) {
+		if (!event.results[i].isFinal) {
+			interimTranscript += event.results[i][0].transcript;
+		}
+	}
+	if (interimTranscript != ""){
+		reactToVoice(interimTranscript.trim());
+	}
+}
+
+recognition.onerror = function(event) {
+	console.log("Error: " + event.error);
+}
+
+recognition.onend = function() {
+	setTimeout(recognition.start(), 100);
+}
+
+function reactToVoice(speech){
+	switch(speech){
+		case "lights on":
+		case "light on":
+		case "turn the lights on":
+			$(".light").show();
+			$("body").css("color", "#000");
+			socket.emit("setting", {"light":"on"});
+			break;
+		case "lights off":
+		case "light off":
+		case "turn the lights off":
+			$(".light").hide();
+			$("body").css("color", "#fff");
+			socket.emit("setting", {"light":"off"});
+			break;
+		case "25%":
+		case "25% light":
+		case "25% lights":
+			$("#left-light, #right-light").width("12.5%");
+			$("#top-light, #bottom-light").height("12.5%");
+			socket.emit("setting", {"lightLevel":12.5});
+			break;
+		case "50%":
+		case "50% light":
+		case "50% lights":
+			$("#left-light, #right-light").width("25%");
+			$("#top-light, #bottom-light").height("25%");
+			socket.emit("setting", {"lightLevel":25});
+			break;
+		case "75%":
+		case "75% light":
+		case "75% lights":
+			$("#left-light, #right-light").width("37.5%");
+			$("#top-light, #bottom-light").height("37.5%");
+			socket.emit("setting", {"lightLevel":37.5});
+			break;
+		case "100%":
+		case "100% light":
+		case "100% lights":
+			$("#left-light, #right-light").width("50%");
+			$("#top-light, #bottom-light").height("50%");
+			socket.emit("setting", {"lightLevel":50});
+			break;
+		case "time":
+		case "what's the time":
+		case "tell me the time":
+			speak("The time is " + $("#time").html());
+			break;
+		case "date":
+		case "what's the date":
+		case "tell me the date":
+			speak("The date is " + new Date().toLocaleDateString());
+			break;
+		case "weather":
+		case "what's the weather":
+		case "what's the weather like":
+			speak("It's currently " + weather['currentWeather'] + " and " + $("#temperature").html());
+			break;
+		case "sunrise":
+		case "when does the sunrise":
+		case "when will the sunrise":
+			if($("#time").html() < $("#sunrise").text().trim()){
+				speak("The sun will rise at " + $("#sunrise").text().trim());
+			} else {
+				speak("The sun rose at " + $("#sunrise").text().trim());
+			}
+			break;
+		case "sunset":
+		case "when does the sunset":
+		case "when will the sunset":
+			if($("#time").html() < $("#sunset").text().trim()){
+				speak("The sun will set at " + $("#sunset").text().trim());
+			} else {
+				speak("The sun set at " + $("#sunset").text().trim());
+			}
+			break;
+		case "alarm":
+		case "when's the next alarm":
+			if (nextAlarm.getMilliseconds() != 0){
+				speak(nextAlarm.toLocaleTimeString().slice(0, -3) + " on " + nextAlarm.toLocaleDateString())
+			} else {
+				speak("There is no alarm set");
+			}
+			break;
+	}
+}
 
 
 

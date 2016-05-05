@@ -139,7 +139,7 @@ def weatherThread():
 			
 			
 			socketio.emit('weather', smallWeatherJSON)
-			time.sleep(1800)
+			time.sleep(900)
 		except Exception as e:
 			print("error: ", e)
 			time.sleep(5)
