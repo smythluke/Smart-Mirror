@@ -1,7 +1,9 @@
 window.onload = function() {
 	
 	startTime();
-	recognition.start()
+	if('webkitSpeechRecognition' in window){
+		recognition.start()
+	}
 	
 	socket = io.connect('http://' + document.domain + ':' + location.port + '/');	
 	socket.on('weather', function(json){
@@ -96,13 +98,15 @@ function ordinal_suffix_of(i) {
 }
 
 function speak(text){
-	if(window.speechSynthesis.speaking){
-		window.speechSynthesis.pause();
-		window.speechSynthesis.cancel();
+	if(window.speechSynthesis.getVoices().length > 0 && 'speechSynthesis' in window){
+		if(window.speechSynthesis.speaking){
+			window.speechSynthesis.pause();
+			window.speechSynthesis.cancel();
+		}
+		var msg = new SpeechSynthesisUtterance(text);
+		window.speechSynthesis.speak(msg);
+		window.speechSynthesis.resume();
 	}
-	var msg = new SpeechSynthesisUtterance(text);
-    window.speechSynthesis.speak(msg);
-	window.speechSynthesis.resume();
 }
 
 var recognition = new webkitSpeechRecognition();
@@ -128,10 +132,13 @@ recognition.onresult = function(event) {
 
 recognition.onerror = function(event) {
 	console.log("Error: " + event.error);
+	if(event.error == "not-allowed"){
+		recognition = 0;
+	}
 }
 
 recognition.onend = function() {
-	setTimeout(recognition.start(), 100);
+	setTimeout(recognition.start(), 500);
 }
 
 function reactToVoice(speech){

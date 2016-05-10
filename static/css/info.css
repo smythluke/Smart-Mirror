@@ -15,6 +15,10 @@ body{
 	font-weight: normal;
 }
 
+.container-fluid .container-fluid, .container-fluid .container-fluid .col-lg-12{
+	padding: 0;
+}
+
 #weatherTable{
 	float: right;
 }
@@ -34,12 +38,14 @@ td{
 	/* color: #419641; */
 	vertical-align: bottom;
 	font-size: 22px;
+	text-align: right;
 }
 
 #temperatureLow{
 	/* color:#c12e2a; */
 	vertical-align: top;
 	font-size: 22px;
+	text-align: right;
 }
 
 #weatherIcon{
